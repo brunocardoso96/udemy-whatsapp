@@ -32,9 +32,8 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         campoNome = findViewById(R.id.editNome);
-        campoEmail = findViewById(R.id.editEmail);
-        campoSenha = findViewById(R.id.editSenha);
-
+        campoEmail = findViewById(R.id.editLoginEmail);
+        campoSenha = findViewById(R.id.editLoginSenha);
     }
 
     public void cadastrarUsuario(Usuario usuario) {
@@ -44,13 +43,13 @@ public class CadastroActivity extends AppCompatActivity {
         ).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     showToast("Sucesso ao cadastrar usuario!");
                 } else {
 
                     String excecao = "";
                     try {
-                        throw  task.getException();
+                        throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
                         excecao = "Digite uma senha forte!";
                     } catch (FirebaseAuthInvalidCredentialsException e) {
@@ -96,7 +95,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void showToast(String text) {
         Toast.makeText(
-                CadastroActivity.this,
+                this,
                 text,
                 Toast.LENGTH_SHORT
         ).show();
