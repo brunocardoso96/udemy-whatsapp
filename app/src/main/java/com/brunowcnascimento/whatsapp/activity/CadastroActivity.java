@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.brunowcnascimento.whatsapp.R;
 import com.brunowcnascimento.whatsapp.config.ConfiguracaoFirebase;
+import com.brunowcnascimento.whatsapp.helper.Base64Custom;
 import com.brunowcnascimento.whatsapp.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +46,17 @@ public class CadastroActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     showToast("Sucesso ao cadastrar usuario!");
+                    finish();
+                    try {
+
+                        String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                        usuario.setId(identificadorUsuario);
+                        usuario.salvar();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
 
                     String excecao = "";

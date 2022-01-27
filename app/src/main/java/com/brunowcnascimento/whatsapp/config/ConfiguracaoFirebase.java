@@ -9,7 +9,7 @@ public class ConfiguracaoFirebase {
     private static DatabaseReference database;
     private static FirebaseAuth auth;
 
-    public DatabaseReference getFirebaseDataBase() {
+    public static DatabaseReference getFirebaseDataBase() {
         if(database == null) {
             database = FirebaseDatabase.getInstance().getReference();
         }
